@@ -25,6 +25,7 @@ use Mailgun\Model\Domain\TrackingResponse;
 use Mailgun\Model\Domain\UpdateClickTrackingResponse;
 use Mailgun\Model\Domain\UpdateConnectionResponse;
 use Mailgun\Model\Domain\UpdateCredentialResponse;
+use Mailgun\Model\Domain\UpdateDKIMSelectorResponse;
 use Mailgun\Model\Domain\UpdateOpenTrackingResponse;
 use Mailgun\Model\Domain\UpdateUnsubscribeTrackingResponse;
 use Mailgun\Model\Domain\VerifyResponse;
@@ -466,4 +467,28 @@ class Domain extends HttpApi
 
         return $this->hydrateResponse($response, UpdateUnsubscribeTrackingResponse::class);
     }
+
+    /**
+     * Change the DKIM selector for a domain.
+     *
+     * @param string $domain   name of the domain
+     * @param string $selector New DKIM selector
+     *
+     * @return UpdateDKIMSelectorResponse|array|ResponseInterface
+     * @throws Exception
+     */
+    public function updateDKIMSelector(string $domain, string $selector)
+    {
+        Assert::stringNotEmpty($domain);
+        Assert::stringNotEmpty($selector);
+
+        $params = [
+            'dkim_selector' => $selector,
+        ];
+
+        $response = $this->httpPost(sprintf('/v3/domains/%s/dkim_selector', $domain), $params);
+
+        return $this->hydrateResponse($response, UpdateDKIMSelectorResponse::class);
+    }
+
 }
