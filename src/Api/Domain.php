@@ -491,4 +491,27 @@ class Domain extends HttpApi
         return $this->hydrateResponse($response, UpdateDKIMSelectorResponse::class);
     }
 
+    /**
+     * Change the web/tracking DNS prefix for a domain.
+     *
+     * @param string $domain   name of the domain
+     * @param string $selector New web selector
+     *
+     * @return UpdateWebPrefixResponse|array|ResponseInterface
+     * @throws Exception
+     */
+    public function updateWebPrefix(string $domain, string $selector)
+    {
+        Assert::stringNotEmpty($domain);
+        Assert::stringNotEmpty($selector);
+
+        $params = [
+            'web_prefix' => $selector,
+        ];
+
+        $response = $this->httpPut(sprintf('/v3/domains/%s/web_prefix', $domain), $params);
+
+        return $this->hydrateResponse($response, UpdateWebPrefixResponse::class);
+    }
+
 }
