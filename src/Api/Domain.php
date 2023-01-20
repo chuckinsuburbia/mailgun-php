@@ -486,7 +486,7 @@ class Domain extends HttpApi
             'dkim_selector' => $selector,
         ];
 
-        $response = $this->httpPost(sprintf('/v3/domains/%s/dkim_selector', $domain), $params);
+        $response = $this->httpPut(sprintf('/v3/domains/%s/dkim_selector', $domain), $params);
 
         return $this->hydrateResponse($response, UpdateDKIMSelectorResponse::class);
     }
