@@ -28,6 +28,7 @@ use Mailgun\Model\Domain\UpdateCredentialResponse;
 use Mailgun\Model\Domain\UpdateDKIMSelectorResponse;
 use Mailgun\Model\Domain\UpdateOpenTrackingResponse;
 use Mailgun\Model\Domain\UpdateUnsubscribeTrackingResponse;
+use Mailgun\Model\Domain\UpdateWebPrefixResponse;
 use Mailgun\Model\Domain\VerifyResponse;
 use Mailgun\Model\Domain\WebSchemeResponse;
 use Psr\Http\Client\ClientExceptionInterface;
