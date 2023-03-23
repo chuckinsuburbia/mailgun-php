@@ -515,4 +515,27 @@ class Domain extends HttpApi
         return $this->hydrateResponse($response, UpdateWebPrefixResponse::class);
     }
 
+    /**
+     * Change the web/tracking DNS prefix for a domain.
+     *
+     * @param string $domain   name of the domain
+     * @param string $pool_id  pool id to assign to the domain
+     *
+     * @return UpdateIpPoolResponse|array|ResponseInterface
+     * @throws Exception
+     */
+    public function updateIpPool(string $domain, string $pool_id)
+    {
+        Assert::stringNotEmpty($domain);
+        Assert::stringNotEmpty($pool_id);
+
+        $params = [
+            'pool_id' => $pool_id,
+        ];
+
+        $response = $this->httpPut(sprintf('/v3/domains/%s/ips', $domain), $params);
+
+        return $this->hydrateResponse($response, UpdateWebPrefixResponse::class);
+    }
+
 }
